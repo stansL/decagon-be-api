@@ -41,6 +41,7 @@
   * Owner only
 - Delete course
   * Owner only
+- Calculate total/average of targets/transactions
   
 ### Reviews****
 - List all reviews for a bootcamp
@@ -78,8 +79,13 @@
 - Update user info
   * Authenticated user only
   * Separate route to update password
-- User CRUD
-  * Admin only
+- User CRUD - Appropriate privileges
+   * Pagination
+   * Select specific fields in result
+   * Limit number of results
+   * Filter by fields
+   * Save user location 
+   * Upload member photo - uploaded to local file system
 - Users can only be made admin by updating the database field manually
 
 ## Security

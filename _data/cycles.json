@@ -1,0 +1,40 @@
+[
+  {
+    "name": "Cycle_1",
+    "slug": "cycle_1",
+    "startDate": "",
+    "endDate": "",
+    "createdAt": "",    
+    "targets": {
+      "annual": 100000,
+      "monthlies": 3000,
+      "welfare": 500,
+      "getTogether": 500
+    },
+    "totalContributions": 640000,
+    "averageContributions": 3500,
+    "totalExpenses": 2000
+  },
+  {
+    "name": "Cycle_2",
+    "startDate": "",
+    "endDate": "",
+    "targets": {
+      "annual": 150000,
+      "monthlies": 3000,
+      "welfare": 500,
+      "getTogether": 500
+    }
+  },
+  {
+    "name": "Cycle_3",
+    "startDate": "",
+    "endDate": "",
+    "targets": {
+      "annual": 0,
+      "monthlies": 3000,
+      "welfare": 500,
+      "getTogether": 500
+    }
+  }
+]

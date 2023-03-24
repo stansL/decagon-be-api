@@ -1,31 +1,31 @@
-const crypto = require('crypto');
-const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const randomize = require('randomatic');
+const crypto = require("crypto");
+const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const randomize = require("randomatic");
 
 const UserSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: [true, 'Please add a name'],
+    required: [true, "Please add a name"],
   },
   email: {
     type: String,
-    required: [true, 'Please add an email'],
+    required: [true, "Please add an email"],
     unique: true,
     match: [
       /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-      'Please add a valid email',
+      "Please add a valid email",
     ],
   },
   role: {
     type: String,
-    enum: ['user', 'publisher'],
-    default: 'user',
+    enum: ["user", "publisher"],
+    default: "user",
   },
   password: {
     type: String,
-    required: [true, 'Please add a password'],
+    required: [true, "Please add a password"],
     minlength: 6,
     select: false,
   },
@@ -46,11 +46,47 @@ const UserSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  phone: {
+    type: String,
+    maxlength: [20, "Phone number can not be longer than 20 characters"],
+  },
+  email: {
+    type: String,
+    match: [
+      /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+      "Please add a valid email",
+    ],
+  },
+  address: {
+    type: String,
+    required: [true, "Please add an address"],
+  },
+  location: {
+    // GeoJSON Point
+    type: {
+      type: String,
+      enum: ["Point"],
+    },
+    coordinates: {
+      type: [Number],
+      index: "2dsphere",
+    },
+    formattedAddress: String,
+    street: String,
+    city: String,
+    state: String,
+    zipcode: String,
+    country: String,
+  },
+  photo: {
+    type: String,
+    default: "no-photo.jpg",
+  },
 });
 
 // Encrypt password using bcrypt
-UserSchema.pre('save', async function (next) {
-  if (!this.isModified('password')) {
+UserSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) {
     next();
   }
 
@@ -81,13 +117,13 @@ UserSchema.methods.matchPassword = async function (enteredPassword) {
 // Generate and hash password token
 UserSchema.methods.getResetPasswordToken = function () {
   // Generate token
-  const resetToken = crypto.randomBytes(20).toString('hex');
+  const resetToken = crypto.randomBytes(20).toString("hex");
 
   // Hash token and set to resetPasswordToken field
   this.resetPasswordToken = crypto
-    .createHash('sha256')
+    .createHash("sha256")
     .update(resetToken)
-    .digest('hex');
+    .digest("hex");
 
   // Set expire
   this.resetPasswordExpire = Date.now() + 10 * 60 * 1000;
@@ -98,16 +134,16 @@ UserSchema.methods.getResetPasswordToken = function () {
 // Generate email confirm token
 UserSchema.methods.generateEmailConfirmToken = function (next) {
   // email confirmation token
-  const confirmationToken = crypto.randomBytes(20).toString('hex');
+  const confirmationToken = crypto.randomBytes(20).toString("hex");
 
   this.confirmEmailToken = crypto
-    .createHash('sha256')
+    .createHash("sha256")
     .update(confirmationToken)
-    .digest('hex');
+    .digest("hex");
 
-  const confirmTokenExtend = crypto.randomBytes(100).toString('hex');
+  const confirmTokenExtend = crypto.randomBytes(100).toString("hex");
   const confirmTokenCombined = `${confirmationToken}.${confirmTokenExtend}`;
   return confirmTokenCombined;
 };
 
-module.exports = mongoose.model('User', UserSchema);
+module.exports = mongoose.model("User", UserSchema);
