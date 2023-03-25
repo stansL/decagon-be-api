@@ -24,7 +24,7 @@ router
   // .route("/").get(getCycles).post(createCycle);
   .route("/")
   // .get(advancedResults(Bootcamp, 'courses'), getCycles)
-  .get(advancedResults(Cycle), getCycles)
+  .get(advancedResults(Cycle,'cycle_instances'), getCycles)
   // .post(protect, authorize('publisher', 'admin'), createCycle);
   .post(createCycle);
 

@@ -9,7 +9,7 @@ const advancedResults = require("../middleware/advancedResults");
 router.route("/").get(
   advancedResults(CycleInstance, {
     path: "cycle",
-    select: "name",
+    select: "name slug",
   }),
   getCycleInstances
 );

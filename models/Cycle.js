@@ -2,58 +2,64 @@ const mongoose = require("mongoose");
 const { default: slugify } = require("slugify");
 // const geocoder = require("../utils/geocoder");
 
-const CycleSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: [true, "Please add a name"],
-    unique: true,
-    trim: true,
-    maxlength: [50, "Name can not be more than 50 characters"],
+const CycleSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: [true, "Please add a name"],
+      unique: true,
+      trim: true,
+      maxlength: [50, "Name can not be more than 50 characters"],
+    },
+    slug: String,
+    startDate: {
+      type: Date,
+      default: Date.now,
+    },
+    endDate: {
+      type: Date,
+      default: Date.now,
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now,
+    },
+    targets: {
+      annual: Number,
+      monthlies: Number,
+      welfare: Number,
+      getTogether: Number,
+    },
+    totalContributions: Number,
+    averageContributions: Number,
+    totalExpenses: Number,
+    // address: {
+    //   type: String,
+    //   required: [true, "Please add an address"],
+    // },
+    // location: {
+    //   // GeoJSON Point
+    //   type: {
+    //     type: String,
+    //     enum: ["Point"],
+    //   },
+    //   coordinates: {
+    //     type: [Number],
+    //     index: "2dsphere",
+    //   },
+    //   formattedAddress: String,
+    //   street: String,
+    //   city: String,
+    //   state: String,
+    //   zipcode: String,
+    //   country: String,
+    // },
   },
-  slug: String,
-  startDate: {
-    type: Date,
-    default: Date.now,
-  },
-  endDate: {
-    type: Date,
-    default: Date.now,
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-  targets: {
-    annual: Number,
-    monthlies: Number,
-    welfare: Number,
-    getTogether: Number,
-  },
-  totalContributions: Number,
-  averageContributions: Number,
-  totalExpenses: Number,
-  // address: {
-  //   type: String,
-  //   required: [true, "Please add an address"],
-  // },
-  // location: {
-  //   // GeoJSON Point
-  //   type: {
-  //     type: String,
-  //     enum: ["Point"],
-  //   },
-  //   coordinates: {
-  //     type: [Number],
-  //     index: "2dsphere",
-  //   },
-  //   formattedAddress: String,
-  //   street: String,
-  //   city: String,
-  //   state: String,
-  //   zipcode: String,
-  //   country: String,
-  // },
-});
+  {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
+  }
+);
 
 // Create bootcamp slug from the name
 CycleSchema.pre("save", function (next) {
@@ -80,21 +86,21 @@ CycleSchema.pre("save", function (next) {
 //   next();
 // });
 
-// // Cascade delete courses when a bootcamp is deleted
-// BootcampSchema.pre('remove', async function(next) {
-//   console.log(`Courses being removed from bootcamp ${this._id}`);
-//   await this.model('Course').deleteMany({ bootcamp: this._id });
-//   console.log(`Reviews being removed from bootcamp ${this._id}`);
-//    await this.model('Review').deleteMany({ bootcamp: this._id });
-//   next();
-// });
+// Cascade delete courses when a bootcamp is deleted
+CycleSchema.pre("remove", async function (next) {
+  console.log(`Instances being removed from cycle ${this._id}`);
+  await this.model("CycleInstance").deleteMany({ cycle: this._id });
+  // console.log(`Reviews being removed from bootcamp ${this._id}`);
+  //  await this.model('Review').deleteMany({ bootcamp: this._id });
+  next();
+});
 
-// // Reverse populate with virtuals
-// BootcampSchema.virtual('courses', {
-//   ref: 'Course',
-//   localField: '_id',
-//   foreignField: 'bootcamp',
-//   justOne: false
-// });
+// Reverse populate with virtuals
+CycleSchema.virtual("cycle_instances", {
+  ref: "CycleInstance",
+  localField: "_id",
+  foreignField: "cycle",
+  justOne: false,
+});
 
 module.exports = mongoose.model("Cycle", CycleSchema);

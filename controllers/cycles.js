@@ -16,7 +16,12 @@ exports.getCycles = asyncHandler(async (req, res, next) => {
 // @route     GET /api/v1/cycles/:id
 // @access    Public
 exports.getCycle = asyncHandler(async (req, res, next) => {
-  const cycle = await Cycle.findById(req.params.id);
+  // const cycle = await Cycle.findById(req.params.id).populate("cycle_instances","meetingDate meetingType");
+  const cycle = await Cycle.findById(req.params.id).populate({
+    path: "cycle_instances",
+    select: "meetingDate meetingType",
+  });
+
   if (!cycle) {
     return next(
       new ErrorResponse(`Cycle with id of ${req.params.id} not found `, 404)
@@ -102,7 +107,7 @@ exports.deleteCycle = asyncHandler(async (req, res, next) => {
   // if (req.user.role !== "admin") {
   //   return next(
   //     new ErrorResponse(
-  //       `User ${req.user.id} is not authorized to delete this cycle`,
+  //       `User ${req.user.id} is not authorized to delete cycles`,
   //       401
   //     )
   //   );
