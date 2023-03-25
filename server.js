@@ -26,6 +26,7 @@ connectDB();
 // const users = require('./routes/users');
 // const reviews = require('./routes/reviews');
 const cycles = require("./routes/cycles");
+const cycle_instances = require("./routes/cycle_instances");
 
 const app = express();
 
@@ -75,6 +76,7 @@ app.use(express.static(path.join(__dirname, "public")));
 // app.use('/api/v1/users', users);
 // app.use('/api/v1/reviews', reviews);
 app.use("/api/v1/cycles", cycles);
+app.use("/api/v1/cycle_instances", cycle_instances);
 
 app.use(errorHandler); //put after the routes for it to work - linear nature of middlewares
 

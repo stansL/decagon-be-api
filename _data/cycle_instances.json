@@ -1,0 +1,38 @@
+[
+  {
+    "_id": "5d725cfec4ded7bcb480eaa7",
+    "cycle": "641d60b805a8b37388be3120",
+    "user": "641d60b805a8b37388be3120",
+    "meetingDate": "2023-03-11",
+    "meetingType": "Regular",
+    "present": ["DEC01"],
+    "apologies": ["DEC02"],
+    "absent": ["DEC03"],
+    "comment": "Some comments",
+    "minutes": "Get started building mobile applications for IOS using Swift and other tools"
+  },
+  {
+    "_id": "5d725cfec4ded7bcb480eaa4",
+    "cycle": "641e911ad588285f904b915f",
+    "user": "641d60b805a8b37388be3120",
+    "meetingDate": "2023-04-11",
+    "meetingType": "Regular",
+    "present": ["DEC01"],
+    "apologies": ["DEC02"],
+    "absent": ["DEC03"],
+    "comment": "Some comments",
+    "minutes": "Get started building mobile applications for IOS using Swift and other tools"
+  },
+  {
+    "_id": "5d725cfec4ded7bcb480eaa5",
+    "cycle": "641d60b805a8b37388be3120",
+    "user": "641d60b805a8b37388be3120",
+    "meetingDate": "2023-05-11",
+    "meetingType": "Regular",
+    "present": ["DEC01"],
+    "apologies": ["DEC02"],
+    "absent": ["DEC03"],
+    "comment": "Some comments",
+    "minutes": "Get started building mobile applications for IOS using Swift and other tools"
+  }
+]
