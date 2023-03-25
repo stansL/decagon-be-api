@@ -1,7 +1,7 @@
 // const path = require('path');
-// const slugify = require("slugify");
-// const ErrorResponse = require('../utils/errorResponse');
-// const asyncHandler = require('../middleware/async');
+const slugify = require("slugify");
+const ErrorResponse = require("../utils/errorResponse");
+const asyncHandler = require("../middleware/async");
 // const geocoder = require('../utils/geocoder');
 const Cycle = require("../models/Cycle");
 
@@ -9,32 +9,26 @@ const Cycle = require("../models/Cycle");
 // @route     GET /api/v1/cycles
 // @access    Public
 exports.getCycles = (req, res, next) => {
-  res.status(200).json({
-    success: true,
-    msg: `:Show all cycles`,
-  });
+  res.status(200).json(res.advancedResults);
 };
 
-// // @desc      Get single cycle
-// // @route     GET /api/v1/cycles/:id
-// // @access    Public
-// exports.getCycle = asyncHandler(async (req, res, next) => {
-//   const cycle = await Cycle.findById(req.params.id);
-
-//   if (!cycle) {
-//     return next(
-//       new ErrorResponse(`Cycle with id of ${req.params.id} not found `, 404)
-//     );
-//   }
-
-//   res.status(200).json({ success: true, data: cycle });
-// });
+// @desc      Get single Cycle
+// @route     GET /api/v1/cycles/:id
+// @access    Public
+exports.getCycle = asyncHandler(async (req, res, next) => {
+  const cycle = await Cycle.findById(req.params.id);
+  if (!cycle) {
+    return next(
+      new ErrorResponse(`Cycle with id of ${req.params.id} not found `, 404)
+    );
+  }
+  res.status(200).json({ success: true, data: cycle });
+});
 
 // @desc      Create new cycle
 // @route     POST /api/v1/cycles
 // @access    Private
-// exports.createCycle = asyncHandler(async (req, res, next) => {
-exports.createCycle = async (req, res, next) => {
+exports.createCycle = asyncHandler(async (req, res, next) => {
   console.log(req.body);
 
   // Add user to req,body
@@ -56,70 +50,68 @@ exports.createCycle = async (req, res, next) => {
     success: true,
     data: cycle,
   });
-};
-// });
+});
 
-// // @desc      Update bootcamp
-// // @route     PUT /api/v1/bootcamps/:id
-// // @access    Private
-// exports.updateBootcamp = asyncHandler(async (req, res, next) => {
-//   let bootcamp = await Bootcamp.findById(req.params.id);
+// @desc      Update cycle
+// @route     PUT /api/v1/cycles/:id
+// @access    Private
+exports.updateCycle = asyncHandler(async (req, res, next) => {
+  let cycle = await Cycle.findById(req.params.id);
 
-//   if (!bootcamp) {
-//     return next(
-//       new ErrorResponse(`Bootcamp not found with id of ${req.params.id}`, 404)
-//     );
-//   }
+  if (!cycle) {
+    return next(
+      new ErrorResponse(`Cycle not found with id of ${req.params.id}`, 404)
+    );
+  }
 
-//   // Make sure user is bootcamp owner
-//   if (bootcamp.user.toString() !== req.user.id && req.user.role !== 'admin') {
-//     return next(
-//       new ErrorResponse(
-//         `User ${req.user.id} is not authorized to update this bootcamp`,
-//         401
-//       )
-//     );
-//   }
+  // // Make sure user is admin
+  // if (cycle.user.toString() !== req.user.id && req.user.role !== "admin") {
+  //   return next(
+  //     new ErrorResponse(
+  //       `User ${req.user.id} is not authorized to update this cycle`,
+  //       401
+  //     )
+  //   );
+  // }
 
-//   // update slug while updating name
-//   if (Object.keys(req.body).includes("name")) {
-//     req.body.slug = slugify(req.body.name, { lower: true });
-//   }
+  // update slug while updating name
+  if (Object.keys(req.body).includes("name")) {
+    req.body.slug = slugify(req.body.name, { lower: true });
+  }
 
-//   bootcamp = await Bootcamp.findByIdAndUpdate(req.params.id, req.body, {
-//     new: true,
-//     runValidators: true
-//   });
+  cycle = await Cycle.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true,
+  });
+  res.status(200).json({ success: true, data: cycle });
+});
 
-//   res.status(200).json({ success: true, data: bootcamp });
-// });
+// @desc      Delete cycle
+// @route     DELETE /api/v1/cycles/:id
+// @access    Private
+exports.deleteCycle = asyncHandler(async (req, res, next) => {
+  const cycle = await Cycle.findById(req.params.id);
 
-// // @desc      Delete bootcamp
-// // @route     DELETE /api/v1/bootcamps/:id
-// // @access    Private
-// exports.deleteBootcamp = asyncHandler(async (req, res, next) => {
-//   const bootcamp = await Bootcamp.findById(req.params.id);
+  if (!cycle) {
+    return next(
+      new ErrorResponse(`Cycle not found with id of ${req.params.id}`, 404)
+    );
+  }
 
-//   if (!bootcamp) {
-//     return next(
-//       new ErrorResponse(`Bootcamp not found with id of ${req.params.id}`, 404)
-//     );
-//   }
+  // Make sure user admin
+  // if (req.user.role !== "admin") {
+  //   return next(
+  //     new ErrorResponse(
+  //       `User ${req.user.id} is not authorized to delete this cycle`,
+  //       401
+  //     )
+  //   );
+  // }
 
-//   // Make sure user is bootcamp owner
-//   if (bootcamp.user.toString() !== req.user.id && req.user.role !== 'admin') {
-//     return next(
-//       new ErrorResponse(
-//         `User ${req.user.id} is not authorized to delete this bootcamp`,
-//         401
-//       )
-//     );
-//   }
+  await cycle.remove();
 
-//   await bootcamp.remove();
-
-//   res.status(200).json({ success: true, data: {} });
-// });
+  res.status(200).json({ success: true, data: {} });
+});
 
 // // @desc      Get bootcamps within a radius
 // // @route     GET /api/v1/bootcamps/radius/:zipcode/:distance
