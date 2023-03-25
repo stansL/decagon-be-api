@@ -6,21 +6,27 @@ const {
   updateCycle,
   deleteCycle,
 } = require("../controllers/cycles");
+
+// Include other resource routers
+const cycleInstanceRouter = require("./cycle_instances");
+// const reviewRouter = require('./reviews');
+
 const router = express.Router();
 const advancedResults = require("../middleware/advancedResults");
-const Cycle = require("../models/Cycle");
 // const { protect, authorize } = require('../middleware/auth');
 
-// // Re-route into other resource routers
-// router.use('/:cycleId/transactions', transactionRouter);
+const Cycle = require("../models/Cycle");
+
+// Re-route into other resource routers
+router.use("/:cycleId/cycle_instances", cycleInstanceRouter);
 
 router
   // .route("/").get(getCycles).post(createCycle);
   .route("/")
   // .get(advancedResults(Bootcamp, 'courses'), getCycles)
   .get(advancedResults(Cycle), getCycles)
-// .post(protect, authorize('publisher', 'admin'), createCycle);
-.post(createCycle);
+  // .post(protect, authorize('publisher', 'admin'), createCycle);
+  .post(createCycle);
 
 router
   .route("/:id")

@@ -1,24 +1,25 @@
-const fs = require('fs');
-const mongoose = require('mongoose');
-const colors = require('colors');
-const dotenv = require('dotenv');
+const fs = require("fs");
+const mongoose = require("mongoose");
+const colors = require("colors");
+const dotenv = require("dotenv");
 
 // Load env vars
-dotenv.config({ path: './config/config.env' });
+dotenv.config({ path: "./config/config.env" });
 
 // Load models
 // const Bootcamp = require('./models/Bootcamp');
 // const Course = require('./models/Course');
 // const User = require('./models/User');
 // const Review = require('./models/Review');
- const Cycle = require('./models/Cycle');
+const Cycle = require("./models/Cycle");
+const CycleInstance = require("./models/CycleInstance");
 
 // Connect to DB
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
 });
 
 // Read JSON files
@@ -38,7 +39,10 @@ mongoose.connect(process.env.MONGO_URI, {
 //   fs.readFileSync(`${__dirname}/_data/reviews.json`, 'utf-8')
 // );
 const cycles = JSON.parse(
-  fs.readFileSync(`${__dirname}/_data/cycles.json`, 'utf-8')
+  fs.readFileSync(`${__dirname}/_data/cycles.json`, "utf-8")
+);
+const cycle_instances = JSON.parse(
+  fs.readFileSync(`${__dirname}/_data/cycle_instances.json`, "utf-8")
 );
 
 // Import into DB
@@ -49,7 +53,8 @@ const importData = async () => {
     // await User.create(users);
     // await Review.create(reviews);
     await Cycle.create(cycles);
-    console.log('Data Imported...'.green.inverse);
+    await CycleInstance.create(cycle_instances);
+    console.log("Data Imported...".green.inverse);
     process.exit();
   } catch (err) {
     console.error(err);
@@ -64,15 +69,16 @@ const deleteData = async () => {
     // await User.deleteMany();
     // await Review.deleteMany();
     await Cycle.deleteMany();
-    console.log('Data Destroyed...'.red.inverse);
+    await CycleInstance.deleteMany();
+    console.log("Data Destroyed...".red.inverse);
     process.exit();
   } catch (err) {
     console.error(err);
   }
 };
 
-if (process.argv[2] === '-i') {
+if (process.argv[2] === "-i") {
   importData();
-} else if (process.argv[2] === '-d') {
+} else if (process.argv[2] === "-d") {
   deleteData();
 }
