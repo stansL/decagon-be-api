@@ -1,40 +1,180 @@
 [
   {
-    "name": "Cycle_1",
-    "slug": "cycle_1",
-    "startDate": "",
-    "endDate": "",
-    "createdAt": "",    
     "targets": {
       "annual": 100000,
       "monthlies": 3000,
       "welfare": 500,
       "getTogether": 500
     },
+    "_id": "641d60b805a8b37388be3120",
+    "name": "Cycle_2",
+    "slug": "cycle_2",
     "totalContributions": 640000,
     "averageContributions": 3500,
-    "totalExpenses": 2000
+    "totalExpenses": 2000,
+    "startDate": "2023-03-24T08:35:04.526Z",
+    "endDate": "2023-03-24T08:35:04.526Z",
+    "createdAt": "2023-03-24T08:35:04.526Z",
+    "__v": 0
   },
   {
-    "name": "Cycle_2",
-    "startDate": "",
-    "endDate": "",
     "targets": {
-      "annual": 150000,
+      "annual": 100000,
       "monthlies": 3000,
       "welfare": 500,
       "getTogether": 500
-    }
+    },
+    "_id": "641e911ad588285f904b915f",
+    "name": "Cycle_1",
+    "startDate": "2023-03-24T08:35:04.526Z",
+    "endDate": "2023-03-24T08:35:04.526Z",
+    "createdAt": "2023-03-24T08:35:04.526Z",
+    "totalContributions": 635000,
+    "averageContributions": 3500,
+    "totalExpenses": 2000,
+    "__v": 0,
+    "slug": "cycle_1"
   },
   {
+    "targets": {
+      "annual": 100000,
+      "monthlies": 3000,
+      "welfare": 500,
+      "getTogether": 500
+    },
+    "_id": "641ea1109ce43e5ea0d76d69",
     "name": "Cycle_3",
-    "startDate": "",
-    "endDate": "",
+    "startDate": "2023-03-24T08:35:04.526Z",
+    "endDate": "2023-03-24T08:35:04.526Z",
+    "createdAt": "2023-03-24T08:35:04.526Z",
+    "totalContributions": 635000,
+    "averageContributions": 3500,
+    "totalExpenses": 2000,
+    "slug": "cycle_3",
+    "__v": 0
+  },
+  {
     "targets": {
-      "annual": 0,
+      "annual": 100000,
       "monthlies": 3000,
       "welfare": 500,
       "getTogether": 500
-    }
+    },
+    "_id": "641ed8dfab5f0056d4c751fc",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -71.3232,
+        42.64981
+      ],
+      "formattedAddress": "220 Pawtucket St, Lowell, MA 01854-3558, US",
+      "street": "220 Pawtucket St",
+      "city": "Lowell",
+      "state": "MA",
+      "zipcode": "01854-3558",
+      "country": "US"
+    },
+    "name": "Cycle_4",
+    "startDate": "2023-03-24T08:35:04.526Z",
+    "endDate": "2023-03-24T08:35:04.526Z",
+    "createdAt": "2023-03-24T08:35:04.526Z",
+    "totalContributions": 635000,
+    "averageContributions": 3500,
+    "totalExpenses": 2000,
+    "slug": "cycle_4",
+    "__v": 0
+  },
+  {
+    "targets": {
+      "annual": 100000,
+      "monthlies": 3000,
+      "welfare": 500,
+      "getTogether": 500
+    },
+    "_id": "641ed91eab5f0056d4c751fe",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        80.79896,
+        7.34154
+      ],
+      "formattedAddress": ", Rangala, , LK",
+      "street": "",
+      "city": "Rangala",
+      "state": "",
+      "zipcode": "",
+      "country": "LK"
+    },
+    "name": "Cycle_5",
+    "startDate": "2023-03-24T08:35:04.526Z",
+    "endDate": "2023-03-24T08:35:04.526Z",
+    "createdAt": "2023-03-24T08:35:04.526Z",
+    "totalContributions": 635000,
+    "averageContributions": 3500,
+    "totalExpenses": 2000,
+    "slug": "cycle_5",
+    "__v": 0
+  },
+  {
+    "targets": {
+      "annual": 100000,
+      "monthlies": 3000,
+      "welfare": 500,
+      "getTogether": 500
+    },
+    "_id": "641ed98cab5f0056d4c75200",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -77.03196,
+        38.89037
+      ],
+      "formattedAddress": ", , , US",
+      "street": "",
+      "city": "",
+      "state": "",
+      "zipcode": "",
+      "country": "US"
+    },
+    "name": "Cycle_6",
+    "startDate": "2023-03-24T08:35:04.526Z",
+    "endDate": "2023-03-24T08:35:04.526Z",
+    "createdAt": "2023-03-24T08:35:04.526Z",
+    "totalContributions": 635000,
+    "averageContributions": 3500,
+    "totalExpenses": 2000,
+    "slug": "cycle_6",
+    "__v": 0
+  },
+  {
+    "targets": {
+      "annual": 100000,
+      "monthlies": 3000,
+      "welfare": 500,
+      "getTogether": 500
+    },
+    "_id": "641ed9e6ab5f0056d4c75206",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -71.3232,
+        42.64981
+      ],
+      "formattedAddress": "220 Pawtucket St, Lowell, MA 01854-3558, US",
+      "street": "220 Pawtucket St",
+      "city": "Lowell",
+      "state": "MA",
+      "zipcode": "01854-3558",
+      "country": "US"
+    },
+    "name": "Cycle_7",
+    "startDate": "2023-03-24T08:35:04.526Z",
+    "endDate": "2023-03-24T08:35:04.526Z",
+    "createdAt": "2023-03-24T08:35:04.526Z",
+    "totalContributions": 635000,
+    "averageContributions": 3500,
+    "totalExpenses": 2000,
+    "slug": "cycle_7",
+    "__v": 0
   }
 ]

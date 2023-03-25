@@ -18,8 +18,9 @@ router
   // .route("/").get(getCycles).post(createCycle);
   .route("/")
   // .get(advancedResults(Bootcamp, 'courses'), getCycles)
-  .get(advancedResults(Cycle), getCycles);
+  .get(advancedResults(Cycle), getCycles)
 // .post(protect, authorize('publisher', 'admin'), createCycle);
+.post(createCycle);
 
 router
   .route("/:id")

@@ -8,9 +8,9 @@ const Cycle = require("../models/Cycle");
 // @desc      Get all cycles
 // @route     GET /api/v1/cycles
 // @access    Public
-exports.getCycles = (req, res, next) => {
+exports.getCycles = asyncHandler(async (req, res, next) => {
   res.status(200).json(res.advancedResults);
-};
+});
 
 // @desc      Get single Cycle
 // @route     GET /api/v1/cycles/:id

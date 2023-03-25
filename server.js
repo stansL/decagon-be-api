@@ -76,7 +76,7 @@ app.use(express.static(path.join(__dirname, "public")));
 // app.use('/api/v1/reviews', reviews);
 app.use("/api/v1/cycles", cycles);
 
-app.use(errorHandler);
+app.use(errorHandler); //put after the routes for it to work - linear nature of middlewares
 
 const PORT = process.env.PORT || 5000;
 
