@@ -86,7 +86,7 @@ CycleSchema.pre("save", function (next) {
 //   next();
 // });
 
-// Cascade delete courses when a bootcamp is deleted
+// Cascade delete cycle instances when a cycle is deleted
 CycleSchema.pre("remove", async function (next) {
   console.log(`Instances being removed from cycle ${this._id}`);
   await this.model("CycleInstance").deleteMany({ cycle: this._id });

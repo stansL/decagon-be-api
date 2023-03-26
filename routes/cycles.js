@@ -23,8 +23,11 @@ router.use("/:cycleId/cycle_instances", cycleInstanceRouter);
 router
   // .route("/").get(getCycles).post(createCycle);
   .route("/")
-  // .get(advancedResults(Bootcamp, 'courses'), getCycles)
-  .get(advancedResults(Cycle,'cycle_instances'), getCycles)
+  .get(advancedResults(Cycle, "cycle_instances"), getCycles) //fetches all the fields for the virtual
+  // advancedResults(Cycle, { //case to limit the number of fields returned as part of the virtual
+  //   path: "cycle_instances",
+  //   select: "meetingDate meetingType",
+  // }),
   // .post(protect, authorize('publisher', 'admin'), createCycle);
   .post(createCycle);
 
