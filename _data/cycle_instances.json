@@ -34,5 +34,16 @@
     "absent": ["DEC03"],
     "comment": "Some comments",
     "minutes": "Get started building mobile applications for IOS using Swift and other tools"
+  },
+  {
+    "present": ["DEC01", "DEC04", "DEC05", "DEC06"],
+    "absent": ["DEC03"],
+    "apologies": ["DEC02"],
+    "_id": "6420098355ddda2870f561a8",
+    "meetingDate": "2023-05-11T00:00:00.000Z",
+    "meetingType": "Regular",
+    "comment": "To be used for deletion purposes",
+    "minutes": "These are to be deleted minutes ",
+    "cycle": "641ea1109ce43e5ea0d76d69"
   }
 ]
