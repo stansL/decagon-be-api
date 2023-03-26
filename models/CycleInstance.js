@@ -28,11 +28,11 @@ const CycleInstanceSchema = new mongoose.Schema({
   },
   totalContributions: Number,
   totalExpenses: Number,
-  // user: {
-  //   type: mongoose.Schema.ObjectId,
-  //   ref: 'User',
-  //   required: true
-  // },
+  createdBy: {
+    type: mongoose.Schema.ObjectId,
+    ref: "User",
+    required: true,
+  },
   cycle: {
     type: mongoose.Schema.ObjectId,
     ref: "Cycle",

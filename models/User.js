@@ -20,8 +20,8 @@ const UserSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ["user", "publisher"],
-    default: "user",
+    enum: ["member", "finance", "welfare", "investment", "chair", "secretary"],
+    default: "member",
   },
   password: {
     type: String,
@@ -48,10 +48,14 @@ const UserSchema = new mongoose.Schema({
   },
   phone: {
     type: String,
+    unique: true,
+    required: [true, "Please add a phone number"],
     maxlength: [20, "Phone number can not be longer than 20 characters"],
   },
   email: {
     type: String,
+    required: [true, "Please add an email address"],
+    unique: [true, "Email address already exists"],
     match: [
       /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
       "Please add a valid email",
@@ -59,7 +63,7 @@ const UserSchema = new mongoose.Schema({
   },
   address: {
     type: String,
-    required: [true, "Please add an address"],
+    // required: [true, "Please add an address"],
   },
   location: {
     // GeoJSON Point
