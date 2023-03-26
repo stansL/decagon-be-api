@@ -113,7 +113,7 @@ exports.deleteCycle = asyncHandler(async (req, res, next) => {
   //   );
   // }
 
-  await cycle.remove();
+  await cycle.remove(); //triggers middlewares - use this instead of findByIdAndDelete
 
   res.status(200).json({ success: true, data: {} });
 });
