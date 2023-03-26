@@ -3,6 +3,8 @@ const {
   getCycleInstances,
   getCycleInstance,
   addCycleInstance,
+  updateCycleInstance,
+  deleteCycleInstance,
 } = require("../controllers/cycle_instance");
 const CycleInstance = require("../models/CycleInstance");
 const router = express.Router({ mergeParams: true });
@@ -20,10 +22,14 @@ router
     getCycleInstances
   )
   .post(addCycleInstance);
-// .post(protect, authorize("publisher", "admin"), addCourse);
+// .post(protect, authorize("publisher", "admin"), addCycleInstance);
 
-router.route("/:id").get(getCycleInstance);
-//   .put(protect, authorize('publisher', 'admin'), updateCourse)
-//   .delete(protect, authorize('publisher', 'admin'), deleteCourse)
+router
+  .route("/:id")
+  .get(getCycleInstance)
+  .put(updateCycleInstance)
+  //   .put(protect, authorize('publisher', 'admin'), updateCycleInstance)
+  .delete(deleteCycleInstance);
+//   .delete(protect, authorize('publisher', 'admin'), deledeleteCycleInstancete)
 
 module.exports = router;
