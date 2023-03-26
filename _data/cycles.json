@@ -9,9 +9,8 @@
     "_id": "641d60b805a8b37388be3120",
     "name": "Cycle_2",
     "slug": "cycle_2",
-    "totalContributions": 640000,
-    "averageContributions": 3500,
-    "totalExpenses": 2000,
+    "cycleContributions": 0,
+    "cycleExpenses": 0,
     "startDate": "2023-03-24T08:35:04.526Z",
     "endDate": "2023-03-24T08:35:04.526Z",
     "createdAt": "2023-03-24T08:35:04.526Z",
@@ -29,9 +28,8 @@
     "startDate": "2023-03-24T08:35:04.526Z",
     "endDate": "2023-03-24T08:35:04.526Z",
     "createdAt": "2023-03-24T08:35:04.526Z",
-    "totalContributions": 635000,
-    "averageContributions": 3500,
-    "totalExpenses": 2000,
+    "cycleContributions": 0,
+    "cycleExpenses": 0,
     "__v": 0,
     "slug": "cycle_1"
   },
@@ -47,9 +45,8 @@
     "startDate": "2023-03-24T08:35:04.526Z",
     "endDate": "2023-03-24T08:35:04.526Z",
     "createdAt": "2023-03-24T08:35:04.526Z",
-    "totalContributions": 635000,
-    "averageContributions": 3500,
-    "totalExpenses": 2000,
+    "cycleContributions": 0,
+    "cycleExpenses": 0,
     "slug": "cycle_3",
     "__v": 0
   },
@@ -63,10 +60,7 @@
     "_id": "641ed8dfab5f0056d4c751fc",
     "location": {
       "type": "Point",
-      "coordinates": [
-        -71.3232,
-        42.64981
-      ],
+      "coordinates": [-71.3232, 42.64981],
       "formattedAddress": "220 Pawtucket St, Lowell, MA 01854-3558, US",
       "street": "220 Pawtucket St",
       "city": "Lowell",
@@ -78,9 +72,8 @@
     "startDate": "2023-03-24T08:35:04.526Z",
     "endDate": "2023-03-24T08:35:04.526Z",
     "createdAt": "2023-03-24T08:35:04.526Z",
-    "totalContributions": 635000,
-    "averageContributions": 3500,
-    "totalExpenses": 2000,
+    "cycleContributions": 0,
+    "cycleExpenses": 0,
     "slug": "cycle_4",
     "__v": 0
   },
@@ -94,10 +87,7 @@
     "_id": "641ed91eab5f0056d4c751fe",
     "location": {
       "type": "Point",
-      "coordinates": [
-        80.79896,
-        7.34154
-      ],
+      "coordinates": [80.79896, 7.34154],
       "formattedAddress": ", Rangala, , LK",
       "street": "",
       "city": "Rangala",
@@ -109,9 +99,8 @@
     "startDate": "2023-03-24T08:35:04.526Z",
     "endDate": "2023-03-24T08:35:04.526Z",
     "createdAt": "2023-03-24T08:35:04.526Z",
-    "totalContributions": 635000,
-    "averageContributions": 3500,
-    "totalExpenses": 2000,
+    "cycleContributions": 0,
+    "cycleExpenses": 0,
     "slug": "cycle_5",
     "__v": 0
   },
@@ -125,10 +114,7 @@
     "_id": "641ed98cab5f0056d4c75200",
     "location": {
       "type": "Point",
-      "coordinates": [
-        -77.03196,
-        38.89037
-      ],
+      "coordinates": [-77.03196, 38.89037],
       "formattedAddress": ", , , US",
       "street": "",
       "city": "",
@@ -140,9 +126,8 @@
     "startDate": "2023-03-24T08:35:04.526Z",
     "endDate": "2023-03-24T08:35:04.526Z",
     "createdAt": "2023-03-24T08:35:04.526Z",
-    "totalContributions": 635000,
-    "averageContributions": 3500,
-    "totalExpenses": 2000,
+    "cycleContributions": 0,
+    "cycleExpenses": 0,
     "slug": "cycle_6",
     "__v": 0
   },
@@ -156,10 +141,7 @@
     "_id": "641ed9e6ab5f0056d4c75206",
     "location": {
       "type": "Point",
-      "coordinates": [
-        -71.3232,
-        42.64981
-      ],
+      "coordinates": [-71.3232, 42.64981],
       "formattedAddress": "220 Pawtucket St, Lowell, MA 01854-3558, US",
       "street": "220 Pawtucket St",
       "city": "Lowell",
@@ -171,9 +153,8 @@
     "startDate": "2023-03-24T08:35:04.526Z",
     "endDate": "2023-03-24T08:35:04.526Z",
     "createdAt": "2023-03-24T08:35:04.526Z",
-    "totalContributions": 635000,
-    "averageContributions": 3500,
-    "totalExpenses": 2000,
+    "cycleContributions": 0,
+    "cycleExpenses": 0,
     "slug": "cycle_7",
     "__v": 0
   }

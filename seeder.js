@@ -53,7 +53,7 @@ const importData = async () => {
     // await User.create(users);
     // await Review.create(reviews);
     await Cycle.create(cycles);
-    await CycleInstance.create(cycle_instances);
+    // await CycleInstance.create(cycle_instances);
     console.log("Data Imported...".green.inverse);
     process.exit();
   } catch (err) {
