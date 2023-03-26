@@ -40,47 +40,47 @@ const CycleInstanceSchema = new mongoose.Schema({
   },
 });
 
-// // Static method to get avg of course tuitions
-// CourseSchema.statics.getAverageCost = async function(bootcampId) {
-//   const obj = await this.aggregate([
-//     {
-//       $match: { bootcamp: bootcampId }
-//     },
-//     {
-//       $group: {
-//         _id: '$bootcamp',
-//         averageCost: { $avg: '$tuition' }
-//       }
-//     }
-//   ]);
+// Static method to get getTotalContributions for all instances in a cycle
+CycleInstanceSchema.statics.getTotalContributions = async function (cycleId) {
+  console.log(`Computing average costs for ${cycleId}....`.blue);
+  const obj = await this.aggregate([
+    {
+      $match: { cycle: cycleId },
+    },
+    {
+      $group: {
+        _id: "$cycle",
+        cycleContributions: { $sum: "$totalContributions" },
+      },
+    },
+  ]);
 
-//   const averageCost = obj[0]
-//     ? Math.ceil(obj[0].averageCost / 10) * 10
-//     : undefined;
-//   try {
-//     await this.model("Bootcamp").findByIdAndUpdate(bootcampId, {
-//       averageCost,
-//     });
-//   } catch (err) {
-//     console.log(err);
-//   }
-// };
+  const cycleContributions = obj[0] ? obj[0].cycleContributions : undefined;
+  try {
+    await this.model("Cycle").findByIdAndUpdate(cycleId, {
+      //TODO - check if there is the ripple effect from the cycle instance transactions
+      cycleContributions,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
 
-// // Call getAverageCost after save
-// CourseSchema.post('save', async function() {
-//   await this.constructor.getAverageCost(this.bootcamp);
-// });
+// Call getTotalContributions after save
+CycleInstanceSchema.post("save", async function () {
+  await this.constructor.getTotalContributions(this.cycle);
+});
 
-// // Call getAverageCost after remove
-// CourseSchema.post('remove', async function () {
-//   await this.constructor.getAverageCost(this.bootcamp);
-// });
+// Call getTotalContributions after remove
+CycleInstanceSchema.post("remove", async function () {
+  await this.constructor.getAverageCost(this.cycle);
+});
 
-// // Call getAverageCost after tuition update
-// CourseSchema.post("findOneAndUpdate", async function (doc) {
-//   if (this.tuition != doc.tuition) {
-//     await doc.constructor.getAverageCost(doc.bootcamp);
-//   }
-// });
+// // Call getTotalContributions after totalContributions update
+CycleInstanceSchema.post("findOneAndUpdate", async function (doc) {
+  if (this.totalContributions != doc.totalContributions) {
+    await doc.constructor.getTotalContributions(doc.cycle);
+  }
+});
 
 module.exports = mongoose.model("CycleInstance", CycleInstanceSchema);
