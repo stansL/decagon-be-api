@@ -30,9 +30,8 @@ const CycleSchema = new mongoose.Schema(
       welfare: Number,
       getTogether: Number,
     },
-    totalContributions: Number,
-    averageContributions: Number,
-    totalExpenses: Number,
+    cycleContributions: Number,
+    cycleExpenses: Number,
     // address: {
     //   type: String,
     //   required: [true, "Please add an address"],

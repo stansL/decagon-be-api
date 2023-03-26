@@ -26,6 +26,8 @@ const CycleInstanceSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  totalContributions: Number,
+  totalExpenses: Number,
   // user: {
   //   type: mongoose.Schema.ObjectId,
   //   ref: 'User',
