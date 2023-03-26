@@ -10,7 +10,7 @@ const CycleInstance = require("../models/CycleInstance");
 const router = express.Router({ mergeParams: true });
 
 const advancedResults = require("../middleware/advancedResults");
-// const { protect, authorize } = require('../middleware/auth');
+const { protect, authorize } = require("../middleware/auth");
 
 router
   .route("/")
@@ -21,15 +21,12 @@ router
     }),
     getCycleInstances
   )
-  .post(addCycleInstance);
-// .post(protect, authorize("publisher", "admin"), addCycleInstance);
+  .post(protect, authorize("admin"), addCycleInstance);
 
 router
   .route("/:id")
   .get(getCycleInstance)
-  .put(updateCycleInstance)
-  //   .put(protect, authorize('publisher', 'admin'), updateCycleInstance)
-  .delete(deleteCycleInstance);
-//   .delete(protect, authorize('publisher', 'admin'), deledeleteCycleInstancete)
+  .put(protect, authorize("admin"), updateCycleInstance)
+  .delete(protect, authorize("admin"), deleteCycleInstance);
 
 module.exports = router;

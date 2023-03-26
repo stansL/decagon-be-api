@@ -13,7 +13,7 @@ const cycleInstanceRouter = require("./cycle_instances");
 
 const router = express.Router();
 const advancedResults = require("../middleware/advancedResults");
-// const { protect, authorize } = require('../middleware/auth');
+const { protect, authorize } = require("../middleware/auth");
 
 const Cycle = require("../models/Cycle");
 
@@ -21,21 +21,16 @@ const Cycle = require("../models/Cycle");
 router.use("/:cycleId/cycle_instances", cycleInstanceRouter);
 
 router
-  // .route("/").get(getCycles).post(createCycle);
   .route("/")
   .get(advancedResults(Cycle, "cycle_instances"), getCycles) //fetches all the fields for the virtual
   // advancedResults(Cycle, { //case to limit the number of fields returned as part of the virtual
   //   path: "cycle_instances",
   //   select: "meetingDate meetingType",
   // }),
-  // .post(protect, authorize('publisher', 'admin'), createCycle);
-  .post(createCycle);
-
+  .post(protect, authorize("admin"), createCycle);
 router
   .route("/:id")
   .get(getCycle)
-  //   .put(protect, authorize('publisher', 'admin'), updateBootcamp)
-  .put(updateCycle)
-  //   .delete(protect, authorize('publisher', 'admin'), deleteBootcamp)
-  .delete(deleteCycle);
+  .put(protect, authorize("admin"), updateCycle)
+  .delete(protect, authorize("admin"), deleteCycle);
 module.exports = router;

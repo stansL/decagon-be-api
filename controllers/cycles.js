@@ -34,10 +34,8 @@ exports.getCycle = asyncHandler(async (req, res, next) => {
 // @route     POST /api/v1/cycles
 // @access    Private
 exports.createCycle = asyncHandler(async (req, res, next) => {
-  console.log(req.body);
-
   // Add user to req,body
-  // req.body.user = req.user.id;
+  req.body.createdBy = req.user.id;
 
   // If the user is not an admin, they can only add one bootcamp
   // if (req.user.role !== 'admin') {
@@ -69,15 +67,15 @@ exports.updateCycle = asyncHandler(async (req, res, next) => {
     );
   }
 
-  // // Make sure user is admin
-  // if (cycle.user.toString() !== req.user.id && req.user.role !== "admin") {
-  //   return next(
-  //     new ErrorResponse(
-  //       `User ${req.user.id} is not authorized to update this cycle`,
-  //       401
-  //     )
-  //   );
-  // }
+  // Make sure user is admin
+  if (req.user.role !== "admin") {
+    return next(
+      new ErrorResponse(
+        `User ${req.user.id} is not authorized to update this cycle`,
+        401
+      )
+    );
+  }
 
   // update slug while updating name
   if (Object.keys(req.body).includes("name")) {
@@ -104,14 +102,14 @@ exports.deleteCycle = asyncHandler(async (req, res, next) => {
   }
 
   // Make sure user admin
-  // if (req.user.role !== "admin") {
-  //   return next(
-  //     new ErrorResponse(
-  //       `User ${req.user.id} is not authorized to delete cycles`,
-  //       401
-  //     )
-  //   );
-  // }
+  if (req.user.role !== "admin") {
+    return next(
+      new ErrorResponse(
+        `User ${req.user.id} is not authorized to delete cycles`,
+        401
+      )
+    );
+  }
 
   await cycle.remove(); //triggers middlewares - use this instead of findByIdAndDelete
 

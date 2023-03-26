@@ -52,7 +52,7 @@ exports.getCycleInstance = asyncHandler(async (req, res, next) => {
 // @access    Private
 exports.addCycleInstance = asyncHandler(async (req, res, next) => {
   req.body.cycle = req.params.cycleId;
-  // req.body.user = req.user.id;
+  req.body.createdBy = req.user.id;
 
   const cycle = await Cycle.findById(req.params.cycleId);
 
@@ -62,15 +62,15 @@ exports.addCycleInstance = asyncHandler(async (req, res, next) => {
     );
   }
 
-  // // Make sure user is admin
-  // if (req.user.role !== "admin") {
-  //   return next(
-  //     new ErrorResponse(
-  //       `User ${req.user.id} is not authorized to add a cycle instance`,
-  //       401
-  //     )
-  //   );
-  // }
+  // Make sure user is admin
+  if (req.user.role !== "admin") {
+    return next(
+      new ErrorResponse(
+        `User ${req.user.id} is not authorized to add a cycle instance`,
+        401
+      )
+    );
+  }
 
   const cycleInstance = await CycleInstance.create(req.body);
 
@@ -92,15 +92,15 @@ exports.updateCycleInstance = asyncHandler(async (req, res, next) => {
     );
   }
 
-  // // Make sure user is admin
-  // if (req.user.role !== "admin") {
-  //   return next(
-  //     new ErrorResponse(
-  //       `User ${req.user.id} is not authorized to update cycle instance ${cycleInstance._id}`,
-  //       401
-  //     )
-  //   );
-  // }
+  // Make sure user is admin
+  if (req.user.role !== "admin") {
+    return next(
+      new ErrorResponse(
+        `User ${req.user.id} is not authorized to update cycle instance ${cycleInstance._id}`,
+        401
+      )
+    );
+  }
 
   cycleInstance = await CycleInstance.findByIdAndUpdate(
     req.params.id,
@@ -134,15 +134,15 @@ exports.deleteCycleInstance = asyncHandler(async (req, res, next) => {
     );
   }
 
-  // // Make sure user is admin
-  // if (req.user.role !== "admin") {
-  //   return next(
-  //     new ErrorResponse(
-  //       `User ${req.user.id} is not authorized to delete instance ${cycleInstance._id}`,
-  //       401
-  //     )
-  //   );
-  // }
+  // Make sure user is admin
+  if (req.user.role !== "admin") {
+    return next(
+      new ErrorResponse(
+        `User ${req.user.id} is not authorized to delete instance ${cycleInstance._id}`,
+        401
+      )
+    );
+  }
 
   await cycleInstance.remove();
 

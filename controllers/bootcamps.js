@@ -1,9 +1,9 @@
-const path = require('path');
+const path = require("path");
 const slugify = require("slugify");
-const ErrorResponse = require('../utils/errorResponse');
-const asyncHandler = require('../middleware/async');
-const geocoder = require('../utils/geocoder');
-const Bootcamp = require('../models/Bootcamp');
+const ErrorResponse = require("../utils/errorResponse");
+const asyncHandler = require("../middleware/async");
+const geocoder = require("../utils/geocoder");
+const Bootcamp = require("../models/Bootcamp");
 
 // @desc      Get all bootcamps
 // @route     GET /api/v1/bootcamps
@@ -38,7 +38,7 @@ exports.createBootcamp = asyncHandler(async (req, res, next) => {
   const publishedBootcamp = await Bootcamp.findOne({ user: req.user.id });
 
   // If the user is not an admin, they can only add one bootcamp
-  if (publishedBootcamp && req.user.role !== 'admin') {
+  if (publishedBootcamp && req.user.role !== "admin") {
     return next(
       new ErrorResponse(
         `The user with ID ${req.user.id} has already published a bootcamp`,
@@ -51,7 +51,7 @@ exports.createBootcamp = asyncHandler(async (req, res, next) => {
 
   res.status(201).json({
     success: true,
-    data: bootcamp
+    data: bootcamp,
   });
 });
 
@@ -68,7 +68,7 @@ exports.updateBootcamp = asyncHandler(async (req, res, next) => {
   }
 
   // Make sure user is bootcamp owner
-  if (bootcamp.user.toString() !== req.user.id && req.user.role !== 'admin') {
+  if (bootcamp.user.toString() !== req.user.id && req.user.role !== "admin") {
     return next(
       new ErrorResponse(
         `User ${req.user.id} is not authorized to update this bootcamp`,
@@ -76,7 +76,7 @@ exports.updateBootcamp = asyncHandler(async (req, res, next) => {
       )
     );
   }
-  
+
   // update slug while updating name
   if (Object.keys(req.body).includes("name")) {
     req.body.slug = slugify(req.body.name, { lower: true });
@@ -84,7 +84,7 @@ exports.updateBootcamp = asyncHandler(async (req, res, next) => {
 
   bootcamp = await Bootcamp.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
-    runValidators: true
+    runValidators: true,
   });
 
   res.status(200).json({ success: true, data: bootcamp });
@@ -103,7 +103,7 @@ exports.deleteBootcamp = asyncHandler(async (req, res, next) => {
   }
 
   // Make sure user is bootcamp owner
-  if (bootcamp.user.toString() !== req.user.id && req.user.role !== 'admin') {
+  if (bootcamp.user.toString() !== req.user.id && req.user.role !== "admin") {
     return next(
       new ErrorResponse(
         `User ${req.user.id} is not authorized to delete this bootcamp`,
@@ -134,13 +134,13 @@ exports.getBootcampsInRadius = asyncHandler(async (req, res, next) => {
   const radius = distance / 3963;
 
   const bootcamps = await Bootcamp.find({
-    location: { $geoWithin: { $centerSphere: [[lng, lat], radius] } }
+    location: { $geoWithin: { $centerSphere: [[lng, lat], radius] } },
   });
 
   res.status(200).json({
     success: true,
     count: bootcamps.length,
-    data: bootcamps
+    data: bootcamps,
   });
 });
 
@@ -157,7 +157,7 @@ exports.bootcampPhotoUpload = asyncHandler(async (req, res, next) => {
   }
 
   // Make sure user is bootcamp owner
-  if (bootcamp.user.toString() !== req.user.id && req.user.role !== 'admin') {
+  if (bootcamp.user.toString() !== req.user.id && req.user.role !== "admin") {
     return next(
       new ErrorResponse(
         `User ${req.user.id} is not authorized to update this bootcamp`,
@@ -173,7 +173,7 @@ exports.bootcampPhotoUpload = asyncHandler(async (req, res, next) => {
   const file = req.files.file;
 
   // Make sure the image is a photo
-  if (!file.mimetype.startsWith('image')) {
+  if (!file.mimetype.startsWith("image")) {
     return next(new ErrorResponse(`Please upload an image file`, 400));
   }
 
@@ -190,7 +190,7 @@ exports.bootcampPhotoUpload = asyncHandler(async (req, res, next) => {
   // Create custom filename
   file.name = `photo_${bootcamp._id}${path.parse(file.name).ext}`;
 
-  file.mv(`${process.env.FILE_UPLOAD_PATH}/${file.name}`, async err => {
+  file.mv(`${process.env.FILE_UPLOAD_PATH}/${file.name}`, async (err) => {
     if (err) {
       console.error(err);
       return next(new ErrorResponse(`Problem with file upload`, 500));
@@ -200,7 +200,7 @@ exports.bootcampPhotoUpload = asyncHandler(async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      data: file.name
+      data: file.name,
     });
   });
 });
