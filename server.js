@@ -27,6 +27,7 @@ const auth = require("./routes/auth");
 // const reviews = require('./routes/reviews');
 const cycles = require("./routes/cycles");
 const cycle_instances = require("./routes/cycle_instances");
+const beneficiaries = require("./routes/beneficiaries");
 
 const app = express();
 
@@ -77,6 +78,7 @@ app.use("/api/v1/auth", auth);
 // app.use('/api/v1/reviews', reviews);
 app.use("/api/v1/cycles", cycles);
 app.use("/api/v1/cycle_instances", cycle_instances);
+app.use("/api/v1/beneficiaries", beneficiaries);
 
 app.use(errorHandler); //put after the routes for it to work - linear nature of middlewares
 

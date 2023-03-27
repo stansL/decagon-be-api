@@ -13,6 +13,7 @@ dotenv.config({ path: "./config/config.env" });
 // const Review = require('./models/Review');
 const Cycle = require("./models/Cycle");
 const CycleInstance = require("./models/CycleInstance");
+const Beneficiary = require("./models/Beneficiary");
 
 // Connect to DB
 mongoose.connect(process.env.MONGO_URI, {
@@ -44,6 +45,9 @@ const cycles = JSON.parse(
 const cycle_instances = JSON.parse(
   fs.readFileSync(`${__dirname}/_data/cycle_instances.json`, "utf-8")
 );
+const beneficiaries = JSON.parse(
+  fs.readFileSync(`${__dirname}/_data/beneficiaries.json`, "utf-8")
+);
 
 // Import into DB
 const importData = async () => {
@@ -54,6 +58,7 @@ const importData = async () => {
     // await Review.create(reviews);
     await Cycle.create(cycles);
     // await CycleInstance.create(cycle_instances);
+    // await Beneficiaries.create(beneficiaries);
     console.log("Data Imported...".green.inverse);
     process.exit();
   } catch (err) {
@@ -70,6 +75,7 @@ const deleteData = async () => {
     // await Review.deleteMany();
     await Cycle.deleteMany();
     await CycleInstance.deleteMany();
+    await Beneficiary.deleteMany();
     console.log("Data Destroyed...".red.inverse);
     process.exit();
   } catch (err) {

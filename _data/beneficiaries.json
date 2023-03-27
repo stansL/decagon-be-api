@@ -1,0 +1,26 @@
+[
+  {
+    "photo": "no-photo.jpg",
+    "_id": "64220087fbba4c2a285a8515",
+    "name": "Alexis Xavier Odhiambo",
+    "description": "Optional description",
+    "phone": "",
+    "email": "",
+    "member": "6420a1b5f4e30361248640cf",
+    "createdBy": "6420a1b5f4e30361248640cf",
+    "relationship": "Son",
+    "createdAt": "2023-03-27T20:45:59.784Z"
+  },
+  {
+    "photo": "no-photo.jpg",
+    "_id": "6421fe929202cb2b60aa8961",
+    "name": "Alexis Xavier Odhiambo",
+    "description": "Optional description",
+    "relationship": "Son",
+    "phone": "",
+    "email": "",
+    "member": "6420a1b5f4e30361248640cf",
+    "createdBy": "6420a1b5f4e30361248640cf",
+    "createdAt": "2023-03-27T20:37:38.948Z"
+  }
+]
