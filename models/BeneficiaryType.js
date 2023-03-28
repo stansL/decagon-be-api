@@ -1,4 +1,4 @@
-const BeneficiaryType = {
+const BeneficiaryType = Object.freeze({
   Spouse: "Spouse",
   Son: "Son",
   Daughter: "Daughter",
@@ -6,7 +6,7 @@ const BeneficiaryType = {
   Sister: "Sister",
   Father: "Father",
   Mother: "Mother",
-};
+});
 
 module.exports = {
   BeneficiaryType,

@@ -17,7 +17,11 @@ const { protect, authorize } = require("../middleware/auth");
 
 router
   .route("/:id/photo")
-  .put(protect, authorize("welfare", "admin"), beneficiaryPhotoUpload);
+  .put(
+    protect,
+    authorize("member", "welfare", "admin"),
+    beneficiaryPhotoUpload
+  );
 
 router
   .route("/")
@@ -27,7 +31,7 @@ router
 router
   .route("/:id")
   .get(getBeneficiary)
-  .put(protect, authorize("welfare", "admin"), updateBeneficiary)
+  .put(protect, authorize("member", "welfare", "admin"), updateBeneficiary)
   .delete(protect, authorize("welfare", "admin"), deleteBeneficiary);
 
 module.exports = router;

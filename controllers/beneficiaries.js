@@ -42,6 +42,14 @@ exports.createBeneficiary = asyncHandler(async (req, res, next) => {
       )
     );
   }
+
+  // Check if member exists
+  const member = await User.findById(req.body.member);
+  if (!member) {
+    return next(
+      new ErrorResponse(`Member not found with id of ${req.body.member}`, 404)
+    );
+  }
   // Add createdBy to req.body
   req.body.createdBy = req.user.id;
   const beneficiary = await Beneficiary.create(req.body);
@@ -69,8 +77,8 @@ exports.updateBeneficiary = asyncHandler(async (req, res, next) => {
 
   // Make sure user is principle member, welfare or admin
   if (
-    beneficiary.user.toString() !== req.user.id &&
-    (req.user.role !== "admin" || req.user.role !== "admin")
+    beneficiary.member.toString() !== req.user.id &&
+    !["admin", "welfare"].includes(req.user.role)
   ) {
     return next(
       new ErrorResponse(
@@ -105,8 +113,8 @@ exports.deleteBeneficiary = asyncHandler(async (req, res, next) => {
 
   // Make sure user is beneficiary owner or has role welfare or admin
   if (
-    beneficiary.user.toString() !== req.user.id &&
-    (req.user.role !== "admin" || req.user.role !== "welfare")
+    beneficiary.member.toString() !== req.user.id &&
+    !["admin", "welfare"].includes(req.user.role)
   ) {
     return next(
       new ErrorResponse(
@@ -135,10 +143,10 @@ exports.beneficiaryPhotoUpload = asyncHandler(async (req, res, next) => {
     );
   }
 
-  // Make sure user is beneficiary owner or has roles welfare or admin
+  // Make sure member is beneficiary owner or has roles welfare or admin
   if (
-    beneficiary.user.toString() !== req.user.id &&
-    (req.user.role !== "admin" || req.user.role !== "welfare")
+    beneficiary.member.toString() !== req.user.id &&
+    !["admin", "welfare"].includes(req.user.role)
   ) {
     return next(
       new ErrorResponse(
