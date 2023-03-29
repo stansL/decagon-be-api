@@ -38,6 +38,10 @@ const CycleSchema = new mongoose.Schema(
     cycleContributions: Number,
     cycleExpenses: Number,
     targetTotal: Number,
+    active: {
+      type: Boolean,
+      default: true,
+    },
     // address: {
     //   type: String,
     //   required: [true, "Please add an address"],
