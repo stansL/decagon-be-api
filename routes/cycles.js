@@ -9,6 +9,7 @@ const {
 
 // Include other resource routers
 const cycleInstanceRouter = require("./cycle_instances");
+const targetRouter = require("./targets");
 // const reviewRouter = require('./reviews');
 
 const router = express.Router();
@@ -19,6 +20,7 @@ const Cycle = require("../models/Cycle");
 
 // Re-route into other resource routers
 router.use("/:cycleId/cycle_instances", cycleInstanceRouter);
+router.use("/:cycleId/targets", targetRouter);
 
 router
   .route("/")
