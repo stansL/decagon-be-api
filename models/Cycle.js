@@ -37,6 +37,7 @@ const CycleSchema = new mongoose.Schema(
     },
     cycleContributions: Number,
     cycleExpenses: Number,
+    targetTotal: Number,
     // address: {
     //   type: String,
     //   required: [true, "Please add an address"],
