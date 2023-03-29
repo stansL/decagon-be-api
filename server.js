@@ -29,6 +29,7 @@ const cycles = require("./routes/cycles");
 const cycle_instances = require("./routes/cycle_instances");
 const beneficiaries = require("./routes/beneficiaries");
 const targets = require("./routes/targets");
+const transactions = require("./routes/transactions");
 
 const app = express();
 
@@ -81,6 +82,7 @@ app.use("/api/v1/cycles", cycles);
 app.use("/api/v1/cycle_instances", cycle_instances);
 app.use("/api/v1/beneficiaries", beneficiaries);
 app.use("/api/v1/targets", targets);
+app.use("/api/v1/transactions", transactions);
 
 app.use(errorHandler); //put after the routes for it to work - linear nature of middlewares
 

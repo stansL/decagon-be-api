@@ -6,15 +6,16 @@
       "welfare": 500,
       "getTogether": 500
     },
+    "active": true,
     "_id": "641d60b805a8b37388be3120",
     "name": "Cycle_2",
     "slug": "cycle_2",
-    "cycleContributions": 0,
+    "cycleContributions": 14460,
     "cycleExpenses": 0,
     "startDate": "2023-03-24T08:35:04.526Z",
     "endDate": "2023-03-24T08:35:04.526Z",
     "createdAt": "2023-03-24T08:35:04.526Z",
-    "__v": 0
+    "targetTotal": 12000
   },
   {
     "targets": {
