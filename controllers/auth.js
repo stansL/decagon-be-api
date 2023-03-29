@@ -31,11 +31,11 @@ exports.register = asyncHandler(async (req, res, next) => {
 
   user.save({ validateBeforeSave: false });
 
-  // const sendResult = await sendEmail({
-  //   email: user.email,
-  //   subject: "Email confirmation token",
-  //   message,
-  // });
+  const sendResult = await sendEmail({
+    email: user.email,
+    subject: "Email confirmation token",
+    message,
+  });
 
   sendTokenResponse(user, 200, res);
 });
@@ -103,6 +103,7 @@ exports.updateDetails = asyncHandler(async (req, res, next) => {
   const fieldsToUpdate = {
     name: req.body.name,
     email: req.body.email,
+    phone: req.body.phone,
   };
 
   const user = await User.findByIdAndUpdate(req.user.id, fieldsToUpdate, {
