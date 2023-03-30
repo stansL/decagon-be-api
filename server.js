@@ -66,7 +66,14 @@ app.use(limiter);
 // Prevent http param pollution
 app.use(hpp());
 
+// Optional whitelisting with cors
+// var corsOptions = {
+//   origin: 'http://decagonpride.com',
+//   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+// }
+
 // Enable CORS
+// app.use(cors(corsOptions)); Only enable for the specified 'whitelist'
 app.use(cors());
 
 // Set static folder
