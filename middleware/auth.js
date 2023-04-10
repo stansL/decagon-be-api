@@ -6,10 +6,6 @@ const User = require("../models/User");
 // Protect routes
 exports.protect = asyncHandler(async (req, res, next) => {
   let token;
-
-  console.log("=============================")
-  console.log(req.headers)
-
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith("Bearer")
@@ -24,7 +20,7 @@ exports.protect = asyncHandler(async (req, res, next) => {
 
   // Make sure token exists
   if (!token) {
-    return next(new ErrorResponse("Not authorized to access this route-no token", 401));
+    return next(new ErrorResponse("Not authorized to access this route - no token", 401));
   }
 
   try {
@@ -33,7 +29,7 @@ exports.protect = asyncHandler(async (req, res, next) => {
     req.user = await User.findById(decoded.id);
     next();
   } catch (err) {
-    return next(new ErrorResponse("Not authorized to access this route - token not verified", 401));
+    return next(new ErrorResponse("Not authorized to access this route - unverified token", 401));
   }
 });
 
