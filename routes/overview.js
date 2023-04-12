@@ -1,5 +1,5 @@
 const express = require('express');
-const { getTransactionsOverview, getTargetsOverview } = require('../controllers/overview');
+const { getTransactionsOverview, getTargetsOverview, getMonthlySummaryOverview } = require('../controllers/overview');
 
 const Transaction = require('../models/Transaction');
 
@@ -9,6 +9,7 @@ const advancedResults = require('../middleware/advancedResults');
 const { protect, authorize } = require('../middleware/auth');
 const { getTransactions } = require('../controllers/transactions');
 const Target = require('../models/Target');
+const CycleInstance = require('../models/CycleInstance');
 
 router
   .route('/transactions')
@@ -17,6 +18,16 @@ router
 router
   .route('/targets')
   .get(advancedResults(Target), getTargetsOverview);
+
+router
+  .route('/monthlySummary')
+  .get(advancedResults(CycleInstance, [{
+    path: "cycle",
+    select: "name slug",
+  }, {
+    path: "transactions",
+    select: "category amount",
+  }]), getMonthlySummaryOverview);
 
 
 module.exports = router;

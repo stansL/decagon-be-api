@@ -38,7 +38,16 @@ const CycleInstanceSchema = new mongoose.Schema({
     ref: "Cycle",
     required: true,
   },
-});
+  active: {
+    type: Boolean,
+    default: true,
+  },
+},
+  {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
+  }
+);
 
 // Static method to get getTotalContributions for all instances in a cycle
 CycleInstanceSchema.statics.getTotalContributions = async function (cycleId) {
@@ -81,6 +90,14 @@ CycleInstanceSchema.post("findOneAndUpdate", async function (doc) {
   if (this.totalContributions != doc.totalContributions) {
     await doc.constructor.getTotalContributions(doc.cycle);
   }
+});
+
+// Reverse populate with virtuals
+CycleInstanceSchema.virtual("transactions", {
+  ref: "Transaction",
+  localField: "_id",
+  foreignField: "cycle_instance",
+  justOne: false,
 });
 
 module.exports = mongoose.model("CycleInstance", CycleInstanceSchema);

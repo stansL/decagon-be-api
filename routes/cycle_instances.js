@@ -20,10 +20,13 @@ router.use('/:cycleInstanceId/transactions', transactionRouter);
 router
   .route("/")
   .get(
-    advancedResults(CycleInstance, {
+    advancedResults(CycleInstance, [{
       path: "cycle",
       select: "name slug",
-    }),
+    }, {
+      path: "transactions",
+      select: "category amount",
+    }]),
     getCycleInstances
   )
   .post(protect, authorize("admin"), addCycleInstance);
