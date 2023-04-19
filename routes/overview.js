@@ -1,5 +1,5 @@
 const express = require('express');
-const { getTransactionsOverview, getTargetsOverview, getMonthlySummaryOverview } = require('../controllers/overview');
+const { getTransactionsOverview, getTargetsOverview, getMonthlySummaryOverview, getTrends } = require('../controllers/overview');
 
 const Transaction = require('../models/Transaction');
 
@@ -28,6 +28,19 @@ router
     path: "transactions",
     select: "category amount",
   }]), getMonthlySummaryOverview);
+
+router
+  .route("/trends")
+  .get(
+    advancedResults(CycleInstance, [{
+      path: "cycle",
+      select: "name slug targets",
+    }, {
+      path: "transactions",
+      select: "category amount",
+    }]),
+    getTrends
+  );
 
 
 module.exports = router;
