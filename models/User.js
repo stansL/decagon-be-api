@@ -163,4 +163,21 @@ UserSchema.methods.generateEmailConfirmToken = function (next) {
   return confirmTokenCombined;
 };
 
+// Reverse populate with virtuals
+UserSchema.virtual('transactions', {
+  ref: 'Transaction',
+  localField: '_id',
+  foreignField: 'member',
+  justOne: false
+});
+
+UserSchema.virtual('targets', {
+  ref: 'Target',
+  localField: '_id',
+  foreignField: 'member',
+  justOne: false
+});
+
+
+
 module.exports = mongoose.model("User", UserSchema);
