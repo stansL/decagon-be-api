@@ -16,6 +16,7 @@ const CycleInstance = require("./models/CycleInstance");
 const Beneficiary = require("./models/Beneficiary");
 const Target = require("./models/Target");
 const Transaction = require("./models/Transaction");
+const TimelineEvent = require("./models/TimelineEvent");
 
 // Connect to DB
 mongoose.connect(process.env.MONGO_URI, {
@@ -56,6 +57,9 @@ const targets = JSON.parse(
 const transactions = JSON.parse(
   fs.readFileSync(`${__dirname}/_data/transactions.json`, "utf-8")
 );
+const events = JSON.parse(
+  fs.readFileSync(`${__dirname}/_data/events.json`, "utf-8")
+);
 
 // Import into DB
 const importData = async () => {
@@ -69,6 +73,7 @@ const importData = async () => {
     // await Beneficiary.create(beneficiaries);
     // await Target.create(targets);
     // await Transaction.create(transactions);
+    // await TimelineEvent.create(events);
     console.log("Data Imported...".green.inverse);
     process.exit();
   } catch (err) {
@@ -88,6 +93,7 @@ const deleteData = async () => {
     await Beneficiary.deleteMany();
     await Target.deleteMany();
     await Transaction.deleteMany();
+    await TimelineEvent.deleteMany();
     console.log("Data Destroyed...".red.inverse);
     process.exit();
   } catch (err) {

@@ -30,6 +30,7 @@ const beneficiaries = require("./routes/beneficiaries");
 const targets = require("./routes/targets");
 const transactions = require("./routes/transactions");
 const overview = require("./routes/overview");
+const timelines = require("./routes/timelineevents");
 
 const app = express();
 
@@ -91,6 +92,7 @@ app.use("/api/v1/beneficiaries", beneficiaries);
 app.use("/api/v1/targets", targets);
 app.use("/api/v1/transactions", transactions);
 app.use("/api/v1/overview", overview);
+app.use("/api/v1/timelines", timelines);
 
 app.use(errorHandler); //put after the routes for it to work - linear nature of middlewares
 
