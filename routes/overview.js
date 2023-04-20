@@ -10,6 +10,8 @@ const { protect, authorize } = require('../middleware/auth');
 const { getTransactions } = require('../controllers/transactions');
 const Target = require('../models/Target');
 const CycleInstance = require('../models/CycleInstance');
+const { getUsers } = require('../controllers/users');
+const User = require('../models/User');
 
 router
   .route('/transactions')
@@ -41,6 +43,22 @@ router
     }]),
     getTrends
   );
+
+
+router
+  .route("/performance")
+  .get(
+    // advancedResults(User, "targets transactions"),
+    advancedResults(User, [{
+      path: "targets",
+      select: "category amount transactionDate",
+    }, {
+      path: "transactions",
+      select: "category amount cycle",
+    }]),
+    getUsers
+  );
+
 
 
 module.exports = router;
