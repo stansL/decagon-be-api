@@ -1,5 +1,5 @@
 const express = require('express');
-const { getTransactionsOverview, getTargetsOverview, getMonthlySummaryOverview, getTrends } = require('../controllers/overview');
+const { getTransactionsOverview, getTargetsOverview, getMonthlySummaryOverview, getTrends, getPerformanceOverview } = require('../controllers/overview');
 
 const Transaction = require('../models/Transaction');
 
@@ -56,7 +56,7 @@ router
       path: "transactions",
       select: "category amount cycle",
     }]),
-    getUsers
+    getPerformanceOverview
   );
 
 
