@@ -179,6 +179,55 @@ exports.getTargetsOverview = asyncHandler(async (req, res, next) => {
   res.status(200).json(Object.fromEntries(map));
 
 });
+// @desc      Get Targets Overview
+// @route     GET /api/v1/overview/targets
+// @access    Public
+exports.getPerformanceOverview = asyncHandler(async (req, res, next) => {
+  let results = res.advancedResults;
+  let data = results.data.map(element => ({
+    id: element.id,
+    role: element.role,
+    name: element.name,
+    email: element.email,
+    phone: element.phone,
+    transactions: processTransactions(element.transactions),
+    targets: processTargets(element.targets)
+  }));
+  res.status(200).json(data);
+});
+
+const processTransactions = (transactions) => {
+  let map = new Map(Object.entries({
+    Contributions: 0,
+    Fine: 0
+  }));
+  transactions.forEach(element => {
+    let key = element.category;
+    let currentValue = map.get(key);
+    if (currentValue === undefined) {
+      map.set("Contributions", map.get("Contributions") + element.amount)
+    } else {
+      map.set(key, currentValue + element.amount);
+    }
+  });
+  return Object.fromEntries(map);
+}
+const processTargets = (targets) => {
+  let map = new Map(Object.entries({
+    Contributions: 0,
+    Fine: 0
+  }));
+  targets.forEach(element => {
+    let key = element.category;
+    let currentValue = map.get(key);
+    if (currentValue === undefined) {
+      map.set("Contributions", map.get("Contributions") + element.amount)
+    } else {
+      map.set(key, currentValue + element.amount);
+    }
+  });
+  return Object.fromEntries(map);
+}
 
 const convertDate = (dateStr) => {
   const date = new Date(dateStr);
